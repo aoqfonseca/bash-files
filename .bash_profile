@@ -36,16 +36,6 @@ parse_current_rvm() {
   fi
 }
 
-# Go stuff
-export GOROOT=$HOME/lib/go
-export GOBIN=$GOROOT/bin
-export GOOS=darwin
-export GOARCH=amd64
-export GOMAXPROCS=1
-
-# Android path
-export ANDROID_HOME=/opt/android-sdk
-export PATH=/usr/local/bin:/usr/local/sbin:/opt/python/bin:$GOBIN:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:/opt/local/bin:/opt/local/sbin:$PATH
 
 # Setting PATH for MacPython 2.5, 2.6 and 2.7
 PYTHON_VERSIONS_PATH="/Library/Frameworks/Python.framework/Versions"
@@ -83,46 +73,37 @@ export VIRTUALENVWRAPPER_PYTHON=`which python`
 source `which virtualenvwrapper.sh`
 [[ -s "/Users/francisco.souza/.rvm/scripts/rvm" ]] && source "/Users/francisco.souza/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
-function work () {
-    typeset env_name="$1"
-    if [ "$env_name" = "" ]
-    then
-        virtualenvwrapper_show_workon_options
-        return 1
-    fi
 
-    virtualenvwrapper_verify_workon_environment $env_name || return 1
 
-    echo "source ~/.bash_profile
-          workon $env_name" > ~/.virtualenvrc
-
-    bash --rcfile ~/.virtualenvrc
+function rails {
+  if [ -e script/rails ]; then
+    script/rails $@
+  else
+    `which rails` $@
+  fi
 }
 
-# Push git changes. $1 = destination branch
-function git_push() {
-    typeset current_branch=$(parse_git_branch)
-    typeset destination_branch="$1"
-    if [ "$destination_branch" = "" ]
-    then
-        typeset destination_branch="master"
-    fi
-    git pull origin $destination_branch && git checkout $destination_branch && git merge $current_branch && git push origin $destination_branch && git checkout $current_branch
+function rake {
+  if [ -e Gemfile ]; then
+    bundle exec rake $@
+  else
+    `which rake` $@
+  fi
 }
 
-function start_g1_app() {
-    mkdir -p $1
-    for file in "__init__.py" "models.py" "views.py" "widgets.py"
-    do
-        touch "${1}/${file}"
-    done
-
-    for directory in "$1/tests" "$1/tests/unit" "$1/tests/functional"
-    do
-        mkdir -p ${directory}
-        touch "${directory}/__init__.py"
-    done
+function heroku {
+  if [ -e Gemfile ]; then
+    bundle exec heroku $@
+  else
+    `which heroku` $@
+  fi
 }
 
-export PYTHONPATH=$HOME/Projetos/publicacao-core/publicacao:$HOME/Projetos/dynamo:$HOME/lib/python:$PYTHONPATH
-export VIRTUOSO_HOME=/usr/local/Cellar/virtuoso/6.1.2
+function rspec {
+  if [ -e Gemfile ]; then
+    bundle exec rspec $@
+  else
+    `which rspec` $@
+  fi
+}
+
