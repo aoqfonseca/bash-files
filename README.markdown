@@ -1,4 +1,4 @@
-#Francisco Souza bashfiles
+#Andre Fonseca
 
 ##Why .bashrc and .bash_profile?
 
