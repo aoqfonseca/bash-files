@@ -1,5 +1,8 @@
-#Andre Fonseca
+# My Shell files
 
-##Why .bashrc and .bash_profile?
+This repo is where I save some of util shell (bash files) 
 
-I use bash_profile on Mac OS X and bashrc on Linux.
+
+I'm currently using the ZSH as prompt, then I have my customized .zshrc
+Other than this, I have some scripts with customizations and helpers functions 
+
