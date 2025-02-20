@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+function switch_tmux_session {
+  echo "$TMUX"
+  if [[ -z  "$TMUX" ]]; then 
+    tmux attach -t $1
+  else
+    echo "Im in tmux session"
+    tmux switch-client -t $1
+  fi
+} 
+
+function trabalhar {
+  
+  if [[ $# -eq 0 ]]; then
+    select_directory=(`find $HOME/Público/Workspace/Unico -depth -maxdepth 1 -type d | fzf`)
+  else
+    select_directory=$HOME/Público/Workspace/Unico/$1
+  fi
+
+  session_name=`basename $select_directory | tr -d "_*-."`
+  tmux has-session -t $session_name 2>/dev/null 
+
+  if [ $? -eq 1 ]; then
+    tmux new-session -d -s  $session_name -c $select_directory
+  fi
+
+  switch_tmux_session $session_name
+}

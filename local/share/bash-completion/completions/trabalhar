@@ -1,0 +1,15 @@
+#! bin/bash
+
+_trabalhar()
+{
+
+	local opts=$( ls $HOME/Público/Workspace/Unico )
+	COMPREPLY=()
+	local cur=${COMP_WORDS[COMP_CWORD]}
+
+	if [ "$COMP_CWORD" -eq 1 ]; then
+		COMPREPLY=($( compgen -W "${opts}" -- ${cur} ))
+	fi
+}
+
+complete -F _trabalhar trabalhar
