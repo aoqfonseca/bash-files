@@ -1,0 +1,105 @@
+# Alacritty configuration matching WezTerm setup
+
+[window]
+# Background opacity (matches WezTerm 0.9)
+opacity = 0.9
+# Disable dynamic title
+dynamic_title = false
+
+[scrolling]
+# Scrollback buffer size
+history = 10000
+
+[font]
+# Font configuration (matches WezTerm JetBrainsMonoMedium Nerd Font Mono)
+normal = { family = "JetBrainsMonoMedium Nerd Font Mono", style = "Regular" }
+bold = { family = "JetBrainsMonoMedium Nerd Font Mono", style = "Bold" }
+italic = { family = "JetBrainsMonoMedium Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "JetBrainsMonoMedium Nerd Font Mono", style = "Bold Italic" }
+# Font size (matches WezTerm 11)
+size = 13
+
+# Catppuccin Mocha theme (matches WezTerm color scheme)
+[colors]
+[colors.primary]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+dim_foreground = "#7f849c"
+bright_foreground = "#cdd6f4"
+
+[colors.cursor]
+text = "#1e1e2e"
+cursor = "#f5e0dc"
+
+[colors.vi_mode_cursor]
+text = "#1e1e2e"
+cursor = "#b4befe"
+
+[colors.search]
+[colors.search.matches]
+foreground = "#1e1e2e"
+background = "#a6adc8"
+
+[colors.search.focused_match]
+foreground = "#1e1e2e"
+background = "#a6e3a1"
+
+[colors.footer_bar]
+foreground = "#1e1e2e"
+background = "#a6adc8"
+
+[colors.hints]
+[colors.hints.start]
+foreground = "#1e1e2e"
+background = "#f9e2af"
+
+[colors.hints.end]
+foreground = "#1e1e2e"
+background = "#a6adc8"
+
+[colors.selection]
+text = "#1e1e2e"
+background = "#f5e0dc"
+
+[colors.normal]
+black = "#45475a"
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+white = "#bac2de"
+
+[colors.bright]
+black = "#585b70"
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+white = "#a6adc8"
+
+[colors.dim]
+black = "#45475a"
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+white = "#bac2de"
+
+# Key bindings (matching WezTerm functionality)
+[[keyboard.bindings]]
+# Toggle fullscreen with Ctrl+Q (matches WezTerm)
+key = "Q"
+mods = "Control"
+action = "ToggleFullscreen"
+
+[[keyboard.bindings]]
+# Clear scrollback with Ctrl+Delete (matches WezTerm)
+key = "Delete"
+mods = "Control"
+action = "ClearHistory"
