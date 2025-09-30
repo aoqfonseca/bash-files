@@ -75,13 +75,6 @@ install_asdf() {
 
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch latest || error_message "Falha ao clonar o repositório do ASDF."
 
-    # Adiciona a configuração do ASDF ao shell
-    echo -e "\n. \"\$HOME/.asdf/asdf.sh\"" >> ~/.bashrc
-    echo -e "\n. \"\$HOME/.asdf/completions/asdf.bash\"" >> ~/.bashrc
-
-    # Recarrega o shell para que o ASDF esteja disponível
-    source "$HOME/.bashrc" || error_message "Falha ao recarregar .bashrc."
-    success_message "ASDF instalado e configurado com sucesso."
 }
 
 # --- Instalar e configurar Golang com ASDF ---
@@ -211,7 +204,6 @@ main() {
     status_message "Iniciando a configuração do ambiente de desenvolvimento..."
     install_dependencies
     install_git
-    # install_asdf
     install_go
     install_node
     install_github_cli
