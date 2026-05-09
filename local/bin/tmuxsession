@@ -11,11 +11,11 @@ function switch_tmux_session {
 } 
 
 function trabalhar {
-  
+    
   if [[ $# -eq 0 ]]; then
-    select_directory=(`find $HOME/Público/Workspace/Unico -depth -maxdepth 1 -type d | fzf`)
+    select_directory=(`find $MY_WORKDIR -depth -maxdepth 1 -type d | fzf`)
   else
-    select_directory=$HOME/Público/Workspace/Unico/$1
+    select_directory=$MY_WORKDIR/$1
   fi
 
   session_name=`basename $select_directory | tr -d "_*-."`
