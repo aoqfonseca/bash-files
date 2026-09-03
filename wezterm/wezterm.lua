@@ -16,9 +16,8 @@ config.color_scheme = "Catppuccin Mocha"
 config.window_background_opacity = 0.9
 
 --Font config
---config.font = wezterm.font("0xProto Nerd Font")
-config.font = wezterm.font("IosevkaTerm Nerd Font")
---config.font = wezterm.font("Inconsolata Nerd Font")
+--config.font = wezterm.font("IosevkaTerm Nerd Font")
+config.font = wezterm.font("Inconsolata Nerd Font", { weight = "DemiBold" })
 config.font_size = 16
 config.window_decorations = "RESIZE"
 
@@ -64,14 +63,26 @@ wezterm.on("update-status", function(window, pane)
 	local font_size = config.font_size
 
 	-- Format the status string
-	local font_status = string.format(" Font: %s, size [%s]   ", font_family, font_size)
+	local font_status = string.format(": %s, size [%s]   ", font_family, font_size)
 
 	-- Set the right status
 	window:set_right_status(wezterm.format({
-		{ Background = { Color = "white" } },
-		{ Foreground = { Color = "blue" } },
-		{ Text = font_status },
+		{ Background = { Color = "black" } },
+		{ Foreground = { Color = "white" } },
+		{ Text = wezterm.nerdfonts.md_format_font .. " " .. font_status },
 	}))
+end)
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	-- Only apply the tmux session label to the currently focused tab
+	if tab.is_active then
+		local tmux_session = tab.active_pane.user_vars.tmux_session
+		if tmux_session and #tmux_session > 0 then
+			return " 📦 " .. tmux_session .. " "
+		end
+	end
+
+	return " " .. tab.active_pane.title .. " "
 end)
 
 local tmux_session = require("plugins/tmux-session")
